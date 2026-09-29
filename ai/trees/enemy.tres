@@ -1,0 +1,59 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://blsbq0iqvnvty"]
+
+[ext_resource type="Script" uid="uid://coce8528j6j2v" path="res://ai/tasks/has_target.gd" id="1_2naaw"]
+[ext_resource type="Script" uid="uid://doe4luhl65kmp" path="res://ai/tasks/set_random_navigation_pos.gd" id="2_p32x8"]
+[ext_resource type="Script" uid="uid://dom3lg5n8j0ig" path="res://ai/tasks/navigation_process.gd" id="3_48346"]
+[ext_resource type="Script" uid="uid://drfvr6mbfamqe" path="res://ai/tasks/follow_target.gd" id="4_jr0nh"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_arx4a"]
+
+[sub_resource type="BTCondition" id="BTCondition_ivbwa"]
+script = ExtResource("1_2naaw")
+
+[sub_resource type="BTInvert" id="BTInvert_3whp4"]
+children = [SubResource("BTCondition_ivbwa")]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_arx4a"]
+
+[sub_resource type="BTAction" id="BTAction_ivbwa"]
+script = ExtResource("2_p32x8")
+
+[sub_resource type="BTAction" id="BTAction_dr8st"]
+script = ExtResource("3_48346")
+
+[sub_resource type="BTSequence" id="BTSequence_y2t2v"]
+custom_name = "Wander Sequence"
+children = [SubResource("BTInvert_3whp4"), SubResource("BTRandomWait_arx4a"), SubResource("BTAction_ivbwa"), SubResource("BTAction_dr8st")]
+
+[sub_resource type="BTCondition" id="BTCondition_tmwro"]
+script = ExtResource("1_2naaw")
+
+[sub_resource type="BBNode" id="BBNode_2s1em"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ivbwa"]
+animation_player = SubResource("BBNode_2s1em")
+animation_name = &"Aggro"
+
+[sub_resource type="BTAction" id="BTAction_3whp4"]
+script = ExtResource("4_jr0nh")
+
+[sub_resource type="BBNode" id="BBNode_ivbwa"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_3whp4"]
+animation_player = SubResource("BBNode_ivbwa")
+animation_name = &"Deaggro"
+
+[sub_resource type="BTSequence" id="BTSequence_vf74m"]
+custom_name = "Follow Target Sequence"
+children = [SubResource("BTCondition_tmwro"), SubResource("BTPlayAnimation_ivbwa"), SubResource("BTAction_3whp4"), SubResource("BTPlayAnimation_3whp4")]
+
+[sub_resource type="BTSelector" id="BTSelector_y2t2v"]
+children = [SubResource("BTSequence_y2t2v"), SubResource("BTSequence_vf74m")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_arx4a")
+root_task = SubResource("BTSelector_y2t2v")

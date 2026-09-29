@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://b4wm5pvhw2vgi"]
+
+[ext_resource type="Script" uid="uid://bbgwkwulls3o5" path="res://scenes/core/characters/character_controller.gd" id="1_juyox"]
+[ext_resource type="Script" uid="uid://bil5jjovd3hkx" path="res://scenes/core/characters/character_physics.gd" id="2_g48l2"]
+[ext_resource type="Texture2D" uid="uid://2eiqlsgrblo8" path="res://assets/img/block.png" id="3_ugg67"]
+[ext_resource type="Script" uid="uid://c82ruuv8cbpp8" path="res://scenes/core/characters/input/character_input.gd" id="4_nragh"]
+[ext_resource type="BehaviorTree" uid="uid://d3sphl41wuvti" path="res://ai/trees/npc.tres" id="5_juyox"]
+
+[sub_resource type="Resource" id="Resource_llaio"]
+script = ExtResource("2_g48l2")
+walk_speed = 75.0
+run_speed = 150.0
+metadata/_custom_type_script = "uid://bil5jjovd3hkx"
+
+[sub_resource type="Animation" id="Animation_atpat"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_kqtwu"]
+resource_name = "Move"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6eyoc"]
+_data = {
+&"Idle": SubResource("Animation_atpat"),
+&"Move": SubResource("Animation_kqtwu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ya7"]
+size = Vector2(14, 14)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_thqvo"]
+
+[node name="NPC" type="CharacterBody2D" unique_id=1454882031 node_paths=PackedStringArray("input", "navigation_agent")]
+collision_layer = 2
+collision_mask = 39
+script = ExtResource("1_juyox")
+input = NodePath("CharacterInput")
+character_physics = SubResource("Resource_llaio")
+navigation_agent = NodePath("NavigationAgent2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=236209389]
+libraries/ = SubResource("AnimationLibrary_6eyoc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1401408367]
+shape = SubResource("RectangleShape2D_u0ya7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1900633406]
+texture = ExtResource("3_ugg67")
+
+[node name="CharacterInput" type="Node2D" parent="." unique_id=1860920018]
+script = ExtResource("4_nragh")
+metadata/_custom_type_script = "uid://c82ruuv8cbpp8"
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=2111406809]
+behavior_tree = ExtResource("5_juyox")
+blackboard_plan = SubResource("BlackboardPlan_thqvo")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=598806880]
+avoidance_enabled = true
+debug_enabled = true

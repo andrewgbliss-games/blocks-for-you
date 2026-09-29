@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bbbpa86xvx6ik"
+path="res://.godot/imported/Logo.aseprite-3e2e2ffb32e8166c0f020ff033f26ea1.res"
+
+[deps]
+
+source_file="res://assets/img/brand/old/Logo.aseprite"
+dest_files=["res://.godot/imported/Logo.aseprite-3e2e2ffb32e8166c0f020ff033f26ea1.res"]
+
+[params]
+

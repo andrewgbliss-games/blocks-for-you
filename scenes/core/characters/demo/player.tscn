@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bct51kld7mwv2"]
+
+[ext_resource type="Script" uid="uid://bbgwkwulls3o5" path="res://scenes/core/characters/character_controller.gd" id="1_yewv4"]
+[ext_resource type="Script" uid="uid://bil5jjovd3hkx" path="res://scenes/core/characters/character_physics.gd" id="2_6eyoc"]
+[ext_resource type="Texture2D" uid="uid://2eiqlsgrblo8" path="res://assets/img/block.png" id="2_76oj4"]
+[ext_resource type="Script" uid="uid://dnsvmso4f6bb" path="res://scenes/core/characters/state_machine/player_state_machine.gd" id="3_76oj4"]
+[ext_resource type="Script" uid="uid://bst5r7880nkti" path="res://scenes/core/characters/input/player_input.gd" id="3_kqtwu"]
+[ext_resource type="Script" uid="uid://b28u3n07sq6m6" path="res://scenes/core/characters/state_machine/states/idle_state.gd" id="4_atpat"]
+[ext_resource type="Script" uid="uid://coq2ryca2i6au" path="res://scenes/core/characters/state_machine/states/move_state.gd" id="5_kqtwu"]
+
+[sub_resource type="Resource" id="Resource_llaio"]
+script = ExtResource("2_6eyoc")
+metadata/_custom_type_script = "uid://bil5jjovd3hkx"
+
+[sub_resource type="Animation" id="Animation_atpat"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_kqtwu"]
+resource_name = "Move"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6eyoc"]
+_data = {
+&"Idle": SubResource("Animation_atpat"),
+&"Move": SubResource("Animation_kqtwu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0ya7"]
+size = Vector2(14, 14)
+
+[node name="Player" type="CharacterBody2D" unique_id=1454882031 node_paths=PackedStringArray("input") groups=["player"]]
+collision_mask = 39
+script = ExtResource("1_yewv4")
+input = NodePath("PlayerInput")
+character_physics = SubResource("Resource_llaio")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=236209389]
+libraries/ = SubResource("AnimationLibrary_6eyoc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1401408367]
+shape = SubResource("RectangleShape2D_u0ya7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1900633406]
+texture = ExtResource("2_76oj4")
+
+[node name="PlayerInput" type="Node2D" parent="." unique_id=438690528]
+script = ExtResource("3_kqtwu")
+metadata/_custom_type_script = "uid://bst5r7880nkti"
+
+[node name="PlayerStateMachine" type="LimboHSM" parent="." unique_id=1659219381]
+script = ExtResource("3_76oj4")
+metadata/_custom_type_script = "uid://dnsvmso4f6bb"
+
+[node name="IdleState" type="LimboState" parent="PlayerStateMachine" unique_id=1087901019 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_atpat")
+animation_player = NodePath("../../AnimationPlayer")
+metadata/_custom_type_script = "uid://b28u3n07sq6m6"
+
+[node name="MoveState" type="LimboState" parent="PlayerStateMachine" unique_id=1547313601 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("5_kqtwu")
+animation_player = NodePath("../../AnimationPlayer")
+metadata/_custom_type_script = "uid://coq2ryca2i6au"

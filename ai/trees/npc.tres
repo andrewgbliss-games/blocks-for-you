@@ -1,0 +1,25 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://d3sphl41wuvti"]
+
+[ext_resource type="Script" uid="uid://doe4luhl65kmp" path="res://ai/tasks/set_random_navigation_pos.gd" id="1_so0uu"]
+[ext_resource type="Script" uid="uid://dom3lg5n8j0ig" path="res://ai/tasks/navigation_process.gd" id="2_387kw"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_arx4a"]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_arx4a"]
+
+[sub_resource type="BTAction" id="BTAction_63ume"]
+script = ExtResource("1_so0uu")
+
+[sub_resource type="BTAction" id="BTAction_dr8st"]
+script = ExtResource("2_387kw")
+
+[sub_resource type="BTSequence" id="BTSequence_y2t2v"]
+custom_name = "Wander Sequence"
+children = [SubResource("BTRandomWait_arx4a"), SubResource("BTAction_63ume"), SubResource("BTAction_dr8st")]
+
+[sub_resource type="BTSelector" id="BTSelector_y2t2v"]
+children = [SubResource("BTSequence_y2t2v")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_arx4a")
+root_task = SubResource("BTSelector_y2t2v")

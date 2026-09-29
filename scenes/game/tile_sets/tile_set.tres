@@ -1,0 +1,29 @@
+[gd_resource type="TileSet" format=3 uid="uid://bi5ee57072vs4"]
+
+[ext_resource type="Texture2D" uid="uid://duo238553oo5k" path="res://assets/img/white_block.png" id="1_etriq"]
+[ext_resource type="Texture2D" uid="uid://bylih4e0u46eo" path="res://assets/img/black_block.png" id="2_gwjcw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tj37l"]
+texture = ExtResource("1_etriq")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_etriq"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_64i4h"]
+texture = ExtResource("2_gwjcw")
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_etriq")
+0:0/1 = 1
+
+[resource]
+physics_layer_0/collision_layer = 32
+physics_layer_0/collision_mask = 39
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_tj37l")
+sources/1 = SubResource("TileSetAtlasSource_64i4h")
