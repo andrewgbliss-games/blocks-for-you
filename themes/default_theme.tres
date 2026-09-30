@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://bkbeh7sgw1fur"]
+
+[ext_resource type="FontFile" uid="uid://bpemy6eb6xjf5" path="res://assets/fonts/PixelFont.ttf" id="1_immqg"]
+
+[resource]
+default_font = ExtResource("1_immqg")
+default_font_size = 32

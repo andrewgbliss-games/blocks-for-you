@@ -17,8 +17,21 @@ script = ExtResource("2_387kw")
 custom_name = "Wander Sequence"
 children = [SubResource("BTRandomWait_arx4a"), SubResource("BTAction_63ume"), SubResource("BTAction_dr8st")]
 
+[sub_resource type="BBVariant" id="BBVariant_387kw"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_78wb1"]
+variable = &"talking"
+value = SubResource("BBVariant_387kw")
+
+[sub_resource type="BTSequence" id="BTSequence_ft6dg"]
+custom_name = "Talking Sequence"
+children = [SubResource("BTCheckVar_78wb1")]
+
 [sub_resource type="BTSelector" id="BTSelector_y2t2v"]
-children = [SubResource("BTSequence_y2t2v")]
+children = [SubResource("BTSequence_y2t2v"), SubResource("BTSequence_ft6dg")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_arx4a")

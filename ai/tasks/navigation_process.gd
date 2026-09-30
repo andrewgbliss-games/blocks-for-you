@@ -9,6 +9,11 @@ func _has_target():
 	return false
 
 func _tick(_delta: float) -> Status:
+	var is_talking = blackboard.get_var("talking", false)
+	if is_talking:
+		return FAILURE
+	
+	
 	if agent.navigation_agent == null or not agent.is_alive:
 		return FAILURE
   
@@ -24,8 +29,6 @@ func _tick(_delta: float) -> Status:
 		return FAILURE
 
 	var speed = agent.character_physics.walk_speed
-	if agent.input.is_action_pressed("run"):
-		speed = agent.character_physics.run_speed
 	var next_path_position: Vector2 = agent.navigation_agent.get_next_path_position()
 	var new_velocity: Vector2 = agent.global_position.direction_to(next_path_position) * speed
 	if agent.navigation_agent.avoidance_enabled:

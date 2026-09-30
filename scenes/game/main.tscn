@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bil5jjovd3hkx" path="res://scenes/core/characters/character_physics.gd" id="3_uaf1y"]
 [ext_resource type="PackedScene" uid="uid://g2cq05hnxwrn" path="res://scenes/core/characters/demo/enemy.tscn" id="3_yd8kv"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_8aysu"]
+[ext_resource type="PackedScene" uid="uid://b4wm5pvhw2vgi" path="res://scenes/core/characters/demo/npc.tscn" id="7_5v64u"]
 
 [sub_resource type="Resource" id="Resource_mkoeh"]
 script = ExtResource("4_8aysu")
@@ -23,6 +24,7 @@ tile_set = ExtResource("2_oekm8")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=984044061]
 physics_interpolation_mode = 1
+top_level = true
 position = Vector2(249, 162)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=1118465543]
@@ -44,26 +46,17 @@ metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 position = Vector2(249, 162)
 character_physics = SubResource("Resource_llaio")
 
+[node name="NPC" parent="." unique_id=1514082798 instance=ExtResource("7_5v64u")]
+position = Vector2(285, 226)
+
 [node name="Enemy" parent="." unique_id=1954004563 instance=ExtResource("3_yd8kv")]
 position = Vector2(505, -74)
 
-[node name="Enemy2" parent="." unique_id=243182020 instance=ExtResource("3_yd8kv")]
-position = Vector2(-62, -45)
+[node name="Enemy2" parent="." unique_id=973244440 instance=ExtResource("3_yd8kv")]
+position = Vector2(-122, -74)
 
-[node name="Enemy3" parent="." unique_id=1398051727 instance=ExtResource("3_yd8kv")]
-position = Vector2(-111, 376)
+[node name="Enemy3" parent="." unique_id=266224346 instance=ExtResource("3_yd8kv")]
+position = Vector2(-122, 366)
 
-[node name="Enemy4" parent="." unique_id=1263260536 instance=ExtResource("3_yd8kv")]
-position = Vector2(812, 129)
-
-[node name="Enemy5" parent="." unique_id=608792215 instance=ExtResource("3_yd8kv")]
-position = Vector2(900, 465)
-
-[node name="Enemy6" parent="." unique_id=864265584 instance=ExtResource("3_yd8kv")]
-position = Vector2(190, 330)
-
-[node name="Enemy7" parent="." unique_id=204327464 instance=ExtResource("3_yd8kv")]
-position = Vector2(193, -174)
-
-[node name="Enemy8" parent="." unique_id=1893902755 instance=ExtResource("3_yd8kv")]
-position = Vector2(-206, 167)
+[node name="Enemy4" parent="." unique_id=1326900512 instance=ExtResource("3_yd8kv")]
+position = Vector2(576, 384)
