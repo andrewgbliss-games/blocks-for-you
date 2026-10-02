@@ -9,8 +9,8 @@
 
 [sub_resource type="Resource" id="Resource_llaio"]
 script = ExtResource("2_g48l2")
-walk_speed = 75.0
-run_speed = 150.0
+acceleration = 50.0
+friction = 5.0
 metadata/_custom_type_script = "uid://bil5jjovd3hkx"
 
 [sub_resource type="Animation" id="Animation_atpat"]
@@ -62,11 +62,10 @@ blackboard_plan = SubResource("BlackboardPlan_thqvo")
 path_postprocessing = 1
 avoidance_enabled = true
 
-[node name="CharacterDialogArea" type="Area2D" parent="." unique_id=158357060 node_paths=PackedStringArray("bt_player", "interaction_position")]
+[node name="CharacterDialogArea" type="Area2D" parent="." unique_id=158357060 node_paths=PackedStringArray("bt_player")]
 collision_layer = 64
 script = ExtResource("6_t6jug")
 bt_player = NodePath("../BTPlayer")
-interaction_position = NodePath(".")
 text = "Press E to talk"
 offset = Vector2(-8, -24)
 stay = true

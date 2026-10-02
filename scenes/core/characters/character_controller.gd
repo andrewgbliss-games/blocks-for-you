@@ -6,9 +6,8 @@ class_name CharacterController extends CharacterBody2D
 
 var is_alive = true
 
-func move(move_speed: float, direction: Vector2):
+func move_dir(move_speed: float, direction: Vector2):
 	velocity = calc_velocity(velocity, direction, move_speed, character_physics.acceleration, character_physics.friction, character_physics.max_velocity)
-	move_and_slide()
 	
 func calc_velocity(v: Vector2, d: Vector2, s: float, a: float, f: float, c: Vector2):
 	if d != Vector2.ZERO:

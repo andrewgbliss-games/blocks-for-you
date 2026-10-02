@@ -14,4 +14,5 @@ func _update(_delta: float) -> void:
 	var speed = agent.character_physics.walk_speed
 	if agent.input.is_action_pressed("run"):
 		speed = agent.character_physics.run_speed
-	agent.move(speed, direction)
+	agent.move_dir(speed, direction)
+	agent.move_and_slide()

@@ -3,15 +3,17 @@ class_name BTNavigationProcess extends BTAction
 @export var target_var: StringName = &"target"
 	
 func _has_target():
-	var target: Node2D = blackboard.get_var(target_var, null)
-	if target and is_instance_valid(target):
-		return true
+	if blackboard.has_var(target_var):
+		var target: Node2D = blackboard.get_var(target_var, null)
+		if target and is_instance_valid(target):
+			return true
 	return false
 
 func _tick(_delta: float) -> Status:
-	var is_talking = blackboard.get_var("talking", false)
-	if is_talking:
-		return FAILURE
+	if blackboard.has_var("talking"):
+		var is_talking = blackboard.get_var("talking", false)
+		if is_talking:
+			return FAILURE
 	
 	
 	if agent.navigation_agent == null or not agent.is_alive:
@@ -30,12 +32,10 @@ func _tick(_delta: float) -> Status:
 
 	var speed = agent.character_physics.walk_speed
 	var next_path_position: Vector2 = agent.navigation_agent.get_next_path_position()
-	var new_velocity: Vector2 = agent.global_position.direction_to(next_path_position) * speed
+	var direction: Vector2 = agent.global_position.direction_to(next_path_position)
+	agent.move_dir(speed, direction)
 	if agent.navigation_agent.avoidance_enabled:
-		agent.navigation_agent.set_velocity(new_velocity)
-	else:
-		agent._on_velocity_computed(new_velocity)
-		
+		agent.navigation_agent.set_velocity(agent.velocity)
 	agent.move_and_slide()
 	
 	return RUNNING

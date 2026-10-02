@@ -10,12 +10,12 @@
 [sub_resource type="BTAction" id="BTAction_63ume"]
 script = ExtResource("1_so0uu")
 
-[sub_resource type="BTAction" id="BTAction_dr8st"]
+[sub_resource type="BTAction" id="BTAction_so0uu"]
 script = ExtResource("2_387kw")
 
 [sub_resource type="BTSequence" id="BTSequence_y2t2v"]
 custom_name = "Wander Sequence"
-children = [SubResource("BTRandomWait_arx4a"), SubResource("BTAction_63ume"), SubResource("BTAction_dr8st")]
+children = [SubResource("BTRandomWait_arx4a"), SubResource("BTAction_63ume"), SubResource("BTAction_so0uu")]
 
 [sub_resource type="BBVariant" id="BBVariant_387kw"]
 type = 1
